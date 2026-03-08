@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 47% 8%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 263 86% 76%;
+    --primary-foreground: 222 47% 8%;
+
+    --secondary: 239 84% 67%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 25% 65%;
+
+    --accent: 330 81% 60%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 91% 71%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 263 86% 76%;
+
+    --radius: 1.5rem;
+
+    --sidebar-background: 215 47% 11%;
+    --sidebar-foreground: 215 25% 65%;
+    --sidebar-primary: 263 86% 76%;
+    --sidebar-primary-foreground: 222 47% 8%;
+    --sidebar-accent: 263 86% 76%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217 33% 17%;
+    --sidebar-ring: 263 86% 76%;
+
+    --dp-indigo: 239 84% 67%;
+    --dp-pink: 330 81% 60%;
+    --dp-green: 160 84% 39%;
+    --dp-amber: 38 92% 50%;
+    --dp-red: 0 91% 71%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .btn-bounce {
+    @apply transition-transform duration-150 active:scale-95;
+  }
+
+  .card-lift {
+    @apply transition-transform duration-300 ease-out;
+  }
+  .card-lift:hover {
+    transform: translateY(-5px);
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@keyframes float-symbols {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+  66% {
+    transform: translateY(10px) rotate(-3deg);
+  }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-3px); }
+  40% { transform: translateX(3px); }
+  60% { transform: translateX(-2px); }
+  80% { transform: translateX(2px); }
+}
+
+.animate-float-slow {
+  animation: float-symbols 8s ease-in-out infinite;
+}
+.animate-float-slower {
+  animation: float-symbols 12s ease-in-out infinite;
+}
+.animate-float-slowest {
+  animation: float-symbols 16s ease-in-out infinite;
+}
