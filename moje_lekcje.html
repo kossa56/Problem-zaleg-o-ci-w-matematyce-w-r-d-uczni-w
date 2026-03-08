@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📚 DonPedros - Moje lekcje</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* DODATKOWE STYLE SPECJALNIE DLA PODSTRONY "MOJE LEKCJE" */
+        /* Zachowują one spójność z Twoim głównym style.css */
+
+        /* Zakładki */
+        .lessons-tabs {
+            display: flex;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .tab-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 40px;
+            background: #0f172a;
+            color: #94a3b8;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tab-btn.active {
+            background: #a78bfa;
+            color: #fff;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active-tab {
+            display: block;
+        }
+
+        /* Grid lekcji */
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .lesson-card {
+            background: #111827;
+            border-radius: 18px;
+            padding: 22px;
+            border: 1px solid #1e293b;
+            transition: 0.2s;
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-3px);
+            border-color: #a78bfa;
+        }
+
+        .lesson-card.completed {
+            border-left: 4px solid #4ade80;
+        }
+
+        .lesson-card.planned {
+            border-left: 4px solid #fbbf24;
+        }
+
+        .lesson-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .lesson-date {
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        .lesson-badge {
+            padding: 4px 10px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .lesson-badge.completed {
+            background: #4ade8020;
+            color: #4ade80;
+        }
+
+        .lesson-badge.planned {
+            background: #fbbf2420;
+            color: #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .lesson-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            color: #94a3b8;
+            font-size: 13px;
+        }
+
+        .lesson-materials {
+            background: #0f172a;
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+        .lesson-materials p {
+            margin: 5px 0;
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        .review-btn, .countdown {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            background: #0f172a;
+            color: #a78bfa;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .review-btn:hover {
+            background: #1e293b;
+        }
+
+        .countdown {
+            text-align: center;
+            background: #fbbf2420;
+            color: #fbbf24;
+        }
+
+        /* Dodatkowe materiały */
+        .extra-materials {
+            background: #111827;
+            border-radius: 18px;
+            padding: 22px;
+            margin-top: 30px;
+        }
+
+        .extra-materials h3 {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .materials-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .material-item {
+            background: #0f172a;
+            padding: 15px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .material-item i {
+            font-size: 20px;
+        }
+
+        .material-date {
+            margin-left: auto;
+            color: #94a3b8;
+            font-size: 13px;
+        }
+
+        /* Panel nauczyciela */
+        .teacher-header {
+            background: #111827;
+            border-radius: 18px;
+            padding: 22px;
+            margin-bottom: 30px;
+            border: 1px solid #1e293b;
+        }
+
+        .teacher-dashboard {
+            display: grid;
+            grid-template-columns: 1.2fr 1.8fr 1.2fr;
+            gap: 20px;
+        }
+
+        .students-panel, .lesson-planner, .courses-panel {
+            background: #111827;
+            border-radius: 18px;
+            padding: 22px;
+            border: 1px solid #1e293b;
+        }
+
+        .students-panel h3, .lesson-planner h3, .courses-panel h3 {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .students-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .student-card-teacher {
+            background: #0f172a;
+            border-radius: 16px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .student-card-teacher:hover {
+            background: #1e293b;
+        }
+
+        .student-card-teacher.active-student {
+            border: 2px solid #a78bfa;
+        }
+
+        .student-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .student-info {
+            flex: 1;
+        }
+
+        .student-info h4 {
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .student-info p {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
+        .student-tags {
+            display: flex;
+            gap: 5px;
+            margin-top: 5px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 20px;
+        }
+
+        .tag.pending {
+            background: #f8717120;
+            color: #f87171;
+        }
+
+        .tag.next {
+            background: #fbbf2420;
+            color: #fbbf24;
+        }
+
+        .add-student-btn {
+            width: 100%;
+            padding: 12px;
+            border: 2px dashed #1e293b;
+            border-radius: 16px;
+            background: transparent;
+            color: #94a3b8;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .add-student-btn:hover {
+            border-color: #a78bfa;
+            color: #a78bfa;
+        }
+
+        .planned-lessons-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .planned-lesson-item {
+            background: #0f172a;
+            padding: 15px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .lesson-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .lesson-date-badge {
+            font-size: 12px;
+            color: #a78bfa;
+            font-weight: 600;
+        }
+
+        .lesson-name {
+            font-weight: 600;
+        }
+
+        .lesson-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            width: 32px;
+            height: 32px;
+            border: none;
+            border-radius: 8px;
+            background: #1e293b;
+            color: #94a3b8;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .icon-btn:hover {
+            background: #a78bfa;
+            color: #fff;
+        }
+
+        .add-lesson-form {
+            background: #0f172a;
+            padding: 20px;
+            border-radius: 16px;
+        }
+
+        .add-lesson-form h4 {
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #94a3b8;
+            font-size: 13px;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 12px;
+            background: #1e293b;
+            border: 1px solid #2d3748;
+            border-radius: 12px;
+            color: white;
+            font-size: 14px;
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: #a78bfa;
+        }
+
+        .file-upload {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px dashed #2d3748;
+            cursor: pointer;
+        }
+
+        .file-upload i {
+            font-size: 24px;
+            color: #94a3b8;
+            margin-bottom: 5px;
+        }
+
+        .schedule-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background: #a78bfa;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .schedule-btn:hover {
+            background: #8b74d5;
+        }
+
+        .courses-search {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .courses-search i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+        }
+
+        .courses-search input {
+            width: 100%;
+            padding: 12px 12px 12px 40px;
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            color: white;
+        }
+
+        .courses-list {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .course-category {
+            margin-bottom: 15px;
+        }
+
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background: #0f172a;
+            border-radius: 10px;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .course-count {
+            color: #94a3b8;
+            font-size: 12px;
+        }
+
+        .category-items {
+            padding-left: 10px;
+        }
+
+        .course-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: #0f172a;
+            border-radius: 10px;
+            margin-bottom: 5px;
+        }
+
+        .course-item i {
+            color: #a78bfa;
+        }
+
+        .course-item span {
+            flex: 1;
+            font-size: 13px;
+        }
+
+        .add-material-btn {
+            width: 28px;
+            height: 28px;
+            border: none;
+            border-radius: 8px;
+            background: #1e293b;
+            color: #94a3b8;
+            cursor: pointer;
+        }
+
+        .add-material-btn:hover {
+            background: #a78bfa;
+            color: white;
+        }
+
+        .manage-courses-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            background: #0f172a;
+            color: #94a3b8;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .manage-courses-btn:hover {
+            background: #1e293b;
+        }
+
+        /* Widoki */
+        .view {
+            display: none;
+        }
+
+        .view.active-view {
+            display: block;
+        }
+
+        /* Przełącznik w sidebarze */
+        .view-toggle {
+            margin: 20px 0;
+            padding: 15px;
+            background: #111827;
+            border-radius: 18px;
+            display: flex;
+            gap: 10px;
+            flex-direction: column;  
+        }
+
+        .toggle-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 12px;
+            background: #1e293b;
+            color: #94a3b8;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .toggle-btn.active {
+            background: #a78bfa;
+            color: #fff;
+        }
+
+        /* Progress card */
+        .progress-summary {
+            margin-bottom: 25px;
+        }
+
+        .progress-card {
+            background: #111827;
+            border-radius: 18px;
+            padding: 22px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border: 1px solid #1e293b;
+        }
+
+        .progress-icon {
+            font-size: 40px;
+        }
+
+        .progress-card h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .progress-card p {
+            color: #94a3b8;
+        }
+
+        .progress-circle {
+            margin-left: auto;
+            position: relative;
+        }
+
+        .circle-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: 700;
+            font-size: 14px;
+            color: #a78bfa;
+        }
+
+        /* Responsywność */
+        @media (max-width: 1200px) {
+            .teacher-dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .lessons-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 1000px) {
+            .lessons-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .teacher-dashboard {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- === PANEL BOCZNY (MENU) - DOKŁADNIE TAKI SAM JAK W TWOIM KODZIE === -->
+<div class="sidebar">
+     <div class="logo">
+        <i class="fa-solid fa-graduation-cap"></i> DonPedros
+    </div>
+    <ul class="menu">
+        <li><a href="index.html"><i class="fa-solid fa-house"></i> Strona główna</a></li>
+        <li class="active"><a href="moje-lekcje.html"><i class="fa-solid fa-book"></i> Moje lekcje</a></li>
+        <li><a href="kursy.html"><i class="fa-solid fa-rocket"></i> Kursy</a></li>
+        <li><a href="zadania.html"><i class="fa-solid fa-pencil"></i> Zadania domowe</a></li>
+        <li><a href="konkursy.html"><i class="fa-solid fa-trophy"></i> Konkursy</a></li>
+        <li><a href="forum.html"><i class="fa-solid fa-comments"></i> Forum</a></li>
+        <li><a href="wyniki.html"><i class="fa-solid fa-chart-line"></i> Wyniki</a></li>
+        <li><a href="profil.html"><i class="fa-solid fa-user"></i> Profil</a></li>
+    </ul>
+    
+    <!-- Przełącznik widoku (dla celów demonstracyjnych) -->
+    <div class="view-toggle">
+        <p style="color: #94a3b8; font-size: 12px; margin-bottom: 8px;">🔧 Widok (demo)</p>
+        <button id="studentViewBtn" class="toggle-btn active">👨‍🎓 Uczeń</button>
+        <button id="teacherViewBtn" class="toggle-btn">👨‍🏫 Nauczyciel</button>
+    </div>
+</div>
+
+<!-- === GŁÓWNA ZAWARTOŚĆ === -->
+<div class="main">
+    <!-- === NAGŁÓWEK === -->
+    <div class="header">
+        <div class="welcome-message">
+            <h1>📚 Moje lekcje</h1>
+            <p id="viewIndicator" style="color: #94a3b8;">👨‍🎓 Widok ucznia - Twoje zaplanowane lekcje</p>
+        </div>
+        
+        <div class="user">
+            <div class="avatar"></div>
+            Don Pedros
+        </div>
+    </div>
+
+    <!-- === WIDOK UCZNIA (domyślnie widoczny) === -->
+    <div id="studentView" class="view active-view">
+        
+        <!-- Sekcja postępu -->
+        <div class="progress-summary">
+            <div class="progress-card">
+                <div class="progress-icon">📊</div>
+                <div>
+                    <h3>Postęp w tym tygodniu</h3>
+                    <p>5 z 8 lekcji ukończonych</p>
+                </div>
+                <div class="progress-circle">
+                    <svg width="60" height="60">
+                        <circle cx="30" cy="30" r="26" stroke="#1e293b" stroke-width="4" fill="none"/>
+                        <circle cx="30" cy="30" r="26" stroke="#a78bfa" stroke-width="4" fill="none" 
+                                stroke-dasharray="163" stroke-dashoffset="49" stroke-linecap="round"/>
+                    </svg>
+                    <span class="circle-text">62%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Zakładki: Poprzednie lekcje | Następne lekcje -->
+        <div class="lessons-tabs">
+            <button class="tab-btn active" data-tab="previous">📋 Poprzednie lekcje</button>
+            <button class="tab-btn" data-tab="next">📅 Zaplanowane lekcje</button>
+        </div>
+
+        <!-- Poprzednie lekcje (tab) -->
+        <div id="previousLessons" class="tab-content active-tab">
+            <div class="lessons-grid">
+                <!-- Karta lekcji 1 -->
+                <div class="lesson-card completed">
+                    <div class="lesson-header">
+                        <span class="lesson-date"><i class="fa-regular fa-calendar"></i> 10 marca 2026</span>
+                        <span class="lesson-badge completed">✓ Ukończono</span>
+                    </div>
+                    <h3 class="lesson-title">Logarytmy - wprowadzenie</h3>
+                    <div class="lesson-meta">
+                        <span><i class="fa-regular fa-clock"></i> 45 min</span>
+                        <span><i class="fa-solid fa-star" style="color: #fbbf24;"></i> 85%</span>
+                    </div>
+                    <div class="lesson-materials">
+                        <p><i class="fa-solid fa-file-pdf"></i> materiały_logarytmy.pdf</p>
+                        <p><i class="fa-solid fa-video"></i> film_wyjaśniający.mp4</p>
+                    </div>
+                    <button class="review-btn">📖 Powtórka</button>
+                </div>
+
+                <!-- Karta lekcji 2 -->
+                <div class="lesson-card completed">
+                    <div class="lesson-header">
+                        <span class="lesson-date"><i class="fa-regular fa-calendar"></i> 8 marca 2026</span>
+                        <span class="lesson-badge completed">✓ Ukończono</span>
+                    </div>
+                    <h3 class="lesson-title">Potęgi i pierwiastki</h3>
+                    <div class="lesson-meta">
+                        <span><i class="fa-regular fa-clock"></i> 50 min</span>
+                        <span><i class="fa-solid fa-star" style="color: #fbbf24;"></i> 92%</span>
+                    </div>
+                    <div class="lesson-materials">
+                        <p><i class="fa-solid fa-file-pdf"></i> potegi_cwiczenia.pdf</p>
+                        <p><i class="fa-solid fa-link"></i> interaktywne_zadania</p>
+                    </div>
+                    <button class="review-btn">📖 Powtórka</button>
+                </div>
+
+                <!-- Karta lekcji 3 -->
+                <div class="lesson-card completed">
+                    <div class="lesson-header">
+                        <span class="lesson-date"><i class="fa-regular fa-calendar"></i> 5 marca 2026</span>
+                        <span class="lesson-badge completed">✓ Ukończono</span>
+                    </div>
+                    <h3 class="lesson-title">Procenty - podstawy</h3>
+                    <div class="lesson-meta">
+                        <span><i class="fa-regular fa-clock"></i> 40 min</span>
+                        <span><i class="fa-solid fa-star" style="color: #fbbf24;"></i> 78%</span>
+                    </div>
+                    <div class="lesson-materials">
+                        <p><i class="fa-solid fa-file-pdf"></i> procenty_karta_pracy.pdf</p>
+                    </div>
+                    <button class="review-btn">📖 Powtórka</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Następne lekcje (tab) -->
+        <div id="nextLessons" class="tab-content">
+            <div class="lessons-grid">
+                <!-- Karta lekcji 1 (następna) -->
+                <div class="lesson-card planned">
+                    <div class="lesson-header">
+                        <span class="lesson-date"><i class="fa-regular fa-calendar"></i> 15 marca 2026 • 16:00</span>
+                        <span class="lesson-badge planned">⏳ Zaplanowane</span>
+                    </div>
+                    <h3 class="lesson-title">Funkcje liniowe - wprowadzenie</h3>
+                    <div class="lesson-meta">
+                        <span><i class="fa-regular fa-clock"></i> 60 min</span>
+                        <span><i class="fa-solid fa-users"></i> 3 uczniów</span>
+                    </div>
+                    <div class="lesson-materials">
+                        <p><i class="fa-solid fa-file-pdf"></i> funkcje_teoria.pdf</p>
+                        <p><i class="fa-solid fa-laptop"></i> ćwiczenia_interaktywne</p>
+                    </div>
+                    <div class="countdown">
+                        <i class="fa-regular fa-hourglass-half"></i> Za 3 dni
+                    </div>
+                </div>
+
+                <!-- Karta lekcji 2 (następna) -->
+                <div class="lesson-card planned">
+                    <div class="lesson-header">
+                        <span class="lesson-date"><i class="fa-regular fa-calendar"></i> 18 marca 2026 • 17:30</span>
+                        <span class="lesson-badge planned">⏳ Zaplanowane</span>
+                    </div>
+                    <h3 class="lesson-title">Równania z jedną niewiadomą</h3>
+                    <div class="lesson-meta">
+                        <span><i class="fa-regular fa-clock"></i> 55 min</span>
+                        <span><i class="fa-solid fa-users"></i> 2 uczniów</span>
+                    </div>
+                    <div class="lesson-materials">
+                        <p><i class="fa-solid fa-file-pdf"></i> rownania_zadania.pdf</p>
+                    </div>
+                    <div class="countdown">
+                        <i class="fa-regular fa-hourglass-half"></i> Za 6 dni
+                    </div>
+                </div>
+
+                <!-- Karta lekcji 3 (następna) -->
+                <div class="lesson-card planned">
+                    <div class="lesson-header">
+                        <span class="lesson-date"><i class="fa-regular fa-calendar"></i> 20 marca 2026 • 15:00</span>
+                        <span class="lesson-badge planned">⏳ Zaplanowane</span>
+                    </div>
+                    <h3 class="lesson-title">Układy równań - wstęp</h3>
+                    <div class="lesson-meta">
+                        <span><i class="fa-regular fa-clock"></i> 50 min</span>
+                        <span><i class="fa-solid fa-users"></i> 4 uczniów</span>
+                    </div>
+                    <div class="lesson-materials">
+                        <p><i class="fa-solid fa-file-pdf"></i> uklady_teoria.pdf</p>
+                        <p><i class="fa-solid fa-video"></i> video_wyklad.mp4</p>
+                    </div>
+                    <div class="countdown">
+                        <i class="fa-regular fa-hourglass-half"></i> Za 8 dni
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dodatkowe materiały dla ucznia -->
+        <div class="extra-materials">
+            <h3><i class="fa-solid fa-download"></i> Dodatkowe materiały od nauczyciela</h3>
+            <div class="materials-list">
+                <div class="material-item">
+                    <i class="fa-solid fa-file-pdf" style="color: #f87171;"></i>
+                    <span>tabela_wzorow_logarytmy.pdf</span>
+                    <span class="material-date">dodano: 12.03</span>
+                </div>
+                <div class="material-item">
+                    <i class="fa-solid fa-file-video" style="color: #60a5fa;"></i>
+                    <span>jak_rozwiazywac_rownania.mp4</span>
+                    <span class="material-date">dodano: 10.03</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- === WIDOK NAUCZYCIELA === -->
+    <div id="teacherView" class="view">
+        <!-- Panel sterowania dla nauczyciela -->
+        <div class="teacher-header">
+            <h2><i class="fa-solid fa-chalkboard-user"></i> Panel nauczyciela - zarządzanie lekcjami</h2>
+            <p style="color: #94a3b8;">Wybierz ucznia i zaplanuj mu lekcje z dostępnych kursów</p>
+        </div>
+
+        <!-- Główny układ dla nauczyciela -->
+        <div class="teacher-dashboard">
+            <!-- Lewa kolumna - lista uczniów -->
+            <div class="students-panel">
+                <h3><i class="fa-solid fa-users"></i> Twoi uczniowie</h3>
+                
+                <div class="students-list">
+                    <!-- Karta ucznia 1 (aktywny) -->
+                    <div class="student-card-teacher active-student">
+                        <div class="student-avatar" style="background: #6366f1;">H</div>
+                        <div class="student-info">
+                            <h4>Hubert Kowalski</h4>
+                            <p>Ostatnia lekcja: 12.03 • Postęp: 65%</p>
+                            <div class="student-tags">
+                                <span class="tag pending">🔴 zaległości: logarytmy</span>
+                                <span class="tag next">⏳ następna: 15.03</span>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right" style="color: #94a3b8;"></i>
+                    </div>
+
+                    <!-- Karta ucznia 2 -->
+                    <div class="student-card-teacher">
+                        <div class="student-avatar" style="background: #ec4899;">A</div>
+                        <div class="student-info">
+                            <h4>Anna Nowak</h4>
+                            <p>Ostatnia lekcja: 11.03 • Postęp: 82%</p>
+                            <div class="student-tags">
+                                <span class="tag pending">🔴 zaległości: procenty</span>
+                                <span class="tag next">⏳ następna: 16.03</span>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right" style="color: #94a3b8;"></i>
+                    </div>
+
+                    <!-- Karta ucznia 3 -->
+                    <div class="student-card-teacher">
+                        <div class="student-avatar" style="background: #10b981;">M</div>
+                        <div class="student-info">
+                            <h4>Mateusz Wiśniewski</h4>
+                            <p>Ostatnia lekcja: 09.03 • Postęp: 41%</p>
+                            <div class="student-tags">
+                                <span class="tag pending">🔴 zaległości: ułamki, geometria</span>
+                                <span class="tag next">⏳ następna: 17.03</span>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right" style="color: #94a3b8;"></i>
+                    </div>
+                </div>
+                
+                <button class="add-student-btn">
+                    <i class="fa-solid fa-plus"></i> Dodaj ucznia
+                </button>
+            </div>
+
+            <!-- Środkowa kolumna - plan lekcji -->
+            <div class="lesson-planner">
+                <h3><i class="fa-regular fa-calendar"></i> Plan lekcji: Hubert Kowalski</h3>
+                
+                <!-- Lista zaplanowanych lekcji -->
+                <div class="planned-lessons-list">
+                    <div class="planned-lesson-item">
+                        <div class="lesson-info">
+                            <span class="lesson-date-badge">15.03.2026 16:00</span>
+                            <span class="lesson-name">Funkcje liniowe - wprowadzenie</span>
+                        </div>
+                        <div class="lesson-actions">
+                            <button class="icon-btn"><i class="fa-solid fa-pen"></i></button>
+                            <button class="icon-btn"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </div>
+                    
+                    <div class="planned-lesson-item">
+                        <div class="lesson-info">
+                            <span class="lesson-date-badge">18.03.2026 17:30</span>
+                            <span class="lesson-name">Równania z jedną niewiadomą</span>
+                        </div>
+                        <div class="lesson-actions">
+                            <button class="icon-btn"><i class="fa-solid fa-pen"></i></button>
+                            <button class="icon-btn"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </div>
+                    
+                    <div class="planned-lesson-item">
+                        <div class="lesson-info">
+                            <span class="lesson-date-badge">22.03.2026 16:00</span>
+                            <span class="lesson-name">Logarytmy - ćwiczenia</span>
+                        </div>
+                        <div class="lesson-actions">
+                            <button class="icon-btn"><i class="fa-solid fa-pen"></i></button>
+                            <button class="icon-btn"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Formularz dodawania nowej lekcji -->
+                <div class="add-lesson-form">
+                    <h4><i class="fa-solid fa-plus-circle"></i> Dodaj nową lekcję</h4>
+                    
+                    <div class="form-group">
+                        <label>Data i godzina:</label>
+                        <input type="datetime-local" class="form-input" value="2026-03-25T16:00">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Wybierz materiał z kursów:</label>
+                        <select class="form-select">
+                            <option value="">-- Wybierz z listy --</option>
+                            <optgroup label="Logarytmy">
+                                <option>Logarytmy - wprowadzenie (kurs podstawowy)</option>
+                                <option>Własności logarytmów (kurs średniozaawansowany)</option>
+                                <option>Równania logarytmiczne (kurs zaawansowany)</option>
+                            </optgroup>
+                            <optgroup label="Potęgi i pierwiastki">
+                                <option>Potęgi - definicje (kurs podstawowy)</option>
+                                <option>Działania na potęgach (kurs podstawowy)</option>
+                                <option>Pierwiastki - wprowadzenie (kurs podstawowy)</option>
+                            </optgroup>
+                            <optgroup label="Funkcje">
+                                <option>Funkcje liniowe (kurs podstawowy)</option>
+                                <option>Miejsce zerowe funkcji (kurs podstawowy)</option>
+                                <option>Wykresy funkcji (kurs średniozaawansowany)</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    
+                    <button class="schedule-btn">
+                        <i class="fa-solid fa-calendar-plus"></i> Zaplanuj lekcję
+                    </button>
+                </div>
+            </div>
+
+            <!-- Prawa kolumna - dostępne kursy -->
+            <div class="courses-panel">
+                <h3><i class="fa-solid fa-rocket"></i> Kursy - materiały</h3>
+                
+                <div class="courses-search">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" placeholder="Szukaj w kursach...">
+                </div>
+                
+                <div class="courses-list">
+                    <!-- Kategoria: Logarytmy -->
+                    <div class="course-category">
+                        <div class="category-header">
+                            <span>📐 Logarytmy</span>
+                            <span class="course-count">12 materiałów</span>
+                        </div>
+                        <div class="category-items">
+                            <div class="course-item">
+                                <i class="fa-solid fa-file-pdf"></i>
+                                <span>Logarytmy - wprowadzenie</span>
+                                <button class="add-material-btn"><i class="fa-solid fa-plus"></i></button>
+                            </div>
+                            <div class="course-item">
+                                <i class="fa-solid fa-file-pdf"></i>
+                                <span>Własności logarytmów</span>
+                                <button class="add-material-btn"><i class="fa-solid fa-plus"></i></button>
+                            </div>
+                            <div class="course-item">
+                                <i class="fa-solid fa-video"></i>
+                                <span>Równania logarytmiczne</span>
+                                <button class="add-material-btn"><i class="fa-solid fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Kategoria: Potęgi -->
+                    <div class="course-category">
+                        <div class="category-header">
+                            <span>🔢 Potęgi i pierwiastki</span>
+                            <span class="course-count">8 materiałów</span>
+                        </div>
+                        <div class="category-items">
+                            <div class="course-item">
+                                <i class="fa-solid fa-file-pdf"></i>
+                                <span>Potęgi - definicje</span>
+                                <button class="add-material-btn"><i class="fa-solid fa-plus"></i></button>
+                            </div>
+                            <div class="course-item">
+                                <i class="fa-solid fa-link"></i>
+                                <span>Interaktywne ćwiczenia</span>
+                                <button class="add-material-btn"><i class="fa-solid fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="manage-courses-btn">
+                    <i class="fa-solid fa-gear"></i> Zarządzaj kursami
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript -->
+<script>
+    // Przełączanie między widokiem ucznia a nauczyciela
+    const studentViewBtn = document.getElementById('studentViewBtn');
+    const teacherViewBtn = document.getElementById('teacherViewBtn');
+    const studentView = document.getElementById('studentView');
+    const teacherView = document.getElementById('teacherView');
+    const viewIndicator = document.getElementById('viewIndicator');
+
+    studentViewBtn.addEventListener('click', function() {
+        studentView.classList.add('active-view');
+        teacherView.classList.remove('active-view');
+        studentViewBtn.classList.add('active');
+        teacherViewBtn.classList.remove('active');
+        viewIndicator.innerHTML = '👨‍🎓 Widok ucznia - Twoje zaplanowane lekcje';
+    });
+
+    teacherViewBtn.addEventListener('click', function() {
+        teacherView.classList.add('active-view');
+        studentView.classList.remove('active-view');
+        teacherViewBtn.classList.add('active');
+        studentViewBtn.classList.remove('active');
+        viewIndicator.innerHTML = '👨‍🏫 Widok nauczyciela - zarządzanie lekcjami uczniów';
+    });
+
+    // Przełączanie zakładek Poprzednie/Następne lekcje
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            tabBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            tabContents.forEach(content => content.classList.remove('active-tab'));
+            
+            const tabId = this.getAttribute('data-tab') + 'Lessons';
+            document.getElementById(tabId).classList.add('active-tab');
+        });
+    });
+</script>
+
+</body>
+</html>
