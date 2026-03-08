@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📚 DonPedros - Twoja przestrzeń do nauki</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<!-- === PANEL BOCZNY (MENU) === -->
+<div class="sidebar">
+    <div class="logo">
+        <i class="fa-solid fa-graduation-cap"></i> DonPedros
+    </div>
+    
+    <ul class="menu">
+        <li class="active"><i class="fa-solid fa-house"></i> <span>Strona główna</span></li>
+        <li><i class="fa-solid fa-book"></i> <span>Moje lekcje</span></li>
+        <li><i class="fa-solid fa-rocket"></i> <span>Kursy</span></li>
+        <li><i class="fa-solid fa-pencil"></i> <span>Zadania</span></li>
+        <li><i class="fa-solid fa-trophy"></i> <span>Konkursy</span></li>
+        <li><i class="fa-solid fa-chart-simple"></i> <span>Moje wyniki</span></li>
+        <li><i class="fa-solid fa-user"></i> <span>Mój profil</span></li>
+    </ul>
+    
+    <div class="sidebar-footer">
+        <div class="streak-badge">
+            <i class="fa-solid fa-fire"></i> 5 dni z rzędu!
+        </div>
+    </div>
+</div>
+
+<!-- === GŁÓWNA ZAWARTOŚĆ === -->
+<div class="main">
+    <!-- === NAGŁÓWEK === -->
+    <div class="header">
+        <div class="welcome-message">
+            <h1>Cześć, Don Pedros! 👋</h1>
+            <p>Miło Cię widzieć. Masz dziś 3 nowe zadania!</p>
+        </div>
+        
+        <div class="user-profile">
+            <div class="avatar">
+                <img src="https://ui-avatars.com/api/?name=Don+Pedros&background=a78bfa&color=fff&size=40" alt="avatar">
+            </div>
+            <div class="user-info">
+                <span class="user-name">Don Pedros</span>
+                <span class="user-level">Poziom 12</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-title">
+        <h2><i class="fa-solid fa-rocket" style="color: #a78bfa;"></i> Szybki start</h2>
+        <p>Wybierz, co chcesz robić dalej</p>
+    </div>
+    
+    <div class="quick-actions">
+        <button class="quick-action-btn" style="background: linear-gradient(145deg, #6366f1, #4f46e5);">
+            <i class="fa-solid fa-bolt"></i>
+            <span>Quick test</span>
+        </button>
+        
+        <button class="quick-action-btn" style="background: linear-gradient(145deg, #ec4899, #db2777);">
+            <i class="fa-solid fa-robot"></i>
+            <span>AI test</span>
+        </button>
+        
+        <button class="quick-action-btn" style="background: linear-gradient(145deg, #f59e0b, #d97706);">
+            <i class="fa-solid fa-trophy"></i>
+            <span>Turniej</span>
+        </button>
+        
+        <button class="quick-action-btn" style="background: linear-gradient(145deg, #10b981, #059669);">
+            <i class="fa-solid fa-brain"></i>
+            <span>Diagnostyka</span>
+        </button>
+    </div>
+
+    <!-- === SEKCJA 1: TWOJE POSTĘPY (KARUZELA KAFELKÓW) === -->
+    <div class="section-title">
+        <h2><i class="fa-solid fa-chart-line" style="color: #a78bfa;"></i> Twoje postępy</h2>
+        <p>Zobacz, jak Ci idzie!</p>
+    </div>
+
+    <div class="stats-cards">
+        <div class="stat-card">
+            <div class="stat-icon" style="background: #6366f120; color: #6366f1;">
+                <i class="fa-solid fa-book-open"></i>
+            </div>
+            <div class="stat-details">
+                <span class="stat-value">12</span>
+                <span class="stat-label">Ukończone lekcje</span>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon" style="background: #ec489920; color: #ec4899;">
+                <i class="fa-solid fa-star"></i>
+            </div>
+            <div class="stat-details">
+                <span class="stat-value">1,280</span>
+                <span class="stat-label">Zdobytych punktów</span>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon" style="background: #10b98120; color: #10b981;">
+                <i class="fa-solid fa-bolt"></i>
+            </div>
+            <div class="stat-details">
+                <span class="stat-value">7</span>
+                <span class="stat-label">Dni z rzędu</span>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon" style="background: #f59e0b20; color: #f59e0b;">
+                <i class="fa-solid fa-gem"></i>
+            </div>
+            <div class="stat-details">
+                <span class="stat-value">85%</span>
+                <span class="stat-label">Średni wynik</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- === SEKCJA 2: CO DZISIAJ ZROBIŁEŚ? === -->
+    <div class="section-title">
+        <h2><i class="fa-regular fa-clock" style="color: #a78bfa;"></i> Ostatnia aktywność</h2>
+        <p>Pokazuje, co uczeń robił.</p>
+    </div>
+
+    <div class="activity-grid">
+        <div class="activity-card">
+            <div class="activity-icon quick">
+                <i class="fa-solid fa-bolt"></i>
+            </div>
+            <div class="activity-content">
+                <h4>Quick test – Logarytmy</h4>
+                <div class="activity-meta">
+                    <span class="badge-score">85%</span>
+                    <span class="activity-time"><i class="fa-regular fa-clock"></i> 2 godz. temu</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="activity-card">
+            <div class="activity-icon zadanie">
+                <i class="fa-solid fa-pencil"></i>
+            </div>
+            <div class="activity-content">
+                <h4>Zadanie – Potęgi</h4>
+                <div class="activity-meta">
+                    <span class="badge-score" style="background: #10b981;">✓ Zrobione</span>
+                    <span class="activity-time"><i class="fa-regular fa-clock"></i> 5 godz. temu</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="activity-card">
+            <div class="activity-icon ai">
+                <i class="fa-solid fa-robot"></i>
+            </div>
+            <div class="activity-content">
+                <h4>AI test – Algebra</h4>
+                <div class="activity-meta">
+                    <span class="badge-score">92%</span>
+                    <span class="activity-time"><i class="fa-regular fa-clock"></i> wczoraj</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- === SEKCJA 3: DZISIEJSZY CEL I RANKING (DWIE KOLUMNY) === -->
+    <div class="two-columns">
+        <!-- Lewa kolumna: Dzisiejszy cel -->
+        <div class="goal-card">
+            <div class="goal-header">
+                <i class="fa-solid fa-bullseye" style="color: #f59e0b; font-size: 24px;"></i>
+                <h3>Dzisiejszy cel</h3>
+                <span class="gamification-badge">Gamification</span>
+            </div>
+            
+            <p class="goal-question">Rozwiąż 10 zadań</p>
+            
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 70%"></div>
+                </div>
+                <div class="progress-stats">
+                    <span>Postęp: <strong>7/10</strong></span>
+                    <span class="progress-emoji">🔥</span>
+                </div>
+            </div>
+            
+            <p class="motivation-text">✔ Jeszcze 3 zadania i dzisiejszy cel będzie Twój!</p>
+        </div>
+        
+        <!-- Prawa kolumna: Ranking tygodnia -->
+        <div class="ranking-card">
+            <div class="ranking-header">
+                <i class="fa-solid fa-trophy" style="color: #fbbf24;"></i>
+                <h3>Ranking tygodnia</h3>
+                <span class="ranking-badge">Konkursy</span>
+            </div>
+            
+            <div class="ranking-list">
+                <div class="ranking-item first">
+                    <div class="rank-position">🥇</div>
+                    <div class="rank-name">Anna K.</div>
+                    <div class="rank-points">520 pkt</div>
+                </div>
+                <div class="ranking-item second">
+                    <div class="rank-position">🥈</div>
+                    <div class="rank-name">Mateusz L.</div>
+                    <div class="rank-points">480 pkt</div>
+                </div>
+                <div class="ranking-item third">
+                    <div class="rank-position">🥉</div>
+                    <div class="rank-name">Hubert K.</div>
+                    <div class="rank-points">450 pkt</div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- === SEKCJA 4: OGŁOSZENIA I ODZNAKI === -->
+    <div class="two-columns">
+        <!-- Lewa kolumna: Ogłoszenia -->
+        <div class="announcements-card">
+            <div class="card-header">
+                <i class="fa-solid fa-bullhorn" style="color: #a78bfa;"></i>
+                <h3>Ogłoszenia z konkursów</h3>
+            </div>
+            
+            <div class="announcement-list">
+                <div class="announcement-item">
+                    <div class="announcement-icon">📢</div>
+                    <div class="announcement-content">
+                        <p class="announcement-title">Konkurs algebra startuje jutro!</p>
+                        <p class="announcement-date">15 marca 2026</p>
+                    </div>
+                </div>
+                
+                <div class="announcement-item">
+                    <div class="announcement-icon">✨</div>
+                    <div class="announcement-content">
+                        <p class="announcement-title">Nowe zadania z funkcji</p>
+                        <p class="announcement-date">14 marca 2026</p>
+                    </div>
+                </div>
+                
+                <div class="announcement-item">
+                    <div class="announcement-icon">🏆</div>
+                    <div class="announcement-content">
+                        <p class="announcement-title">Wyniki turnieju opublikowane</p>
+                        <p class="announcement-date">12 marca 2026</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Prawa kolumna: Odznaki -->
+        <div class="badges-card">
+            <div class="card-header">
+                <i class="fa-solid fa-medal" style="color: #f59e0b;"></i>
+                <h3>Twoje odznaki</h3>
+            </div>
+            
+            <div class="badges-grid">
+                <div class="badge-item">
+                    <div class="badge-icon" style="background: #6366f120; color: #6366f1;">🏆</div>
+                    <span class="badge-name">Król logarytmów</span>
+                </div>
+                
+                <div class="badge-item">
+                    <div class="badge-icon" style="background: #ec489920; color: #ec4899;">🔥</div>
+                    <span class="badge-name">5 dni streak</span>
+                </div>
+                
+                <div class="badge-item">
+                    <div class="badge-icon" style="background: #10b98120; color: #10b981;">⚡</div>
+                    <span class="badge-name">Quick test master</span>
+                </div>
+                
+                <div class="badge-item">
+                    <div class="badge-icon" style="background: #f59e0b20; color: #f59e0b;">🧠</div>
+                    <span class="badge-name">Mistrz zadań</span>
+                </div>
+            </div>
+            
+            <div class="badges-footer">
+                <p>Masz <strong>4 odznaki</strong>! Zbierz 2 kolejne, aby przejść na poziom 13.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- === SEKCJA 5: DYSCYPLINA - WYKRES TYGODNIA === -->
+    <div class="discipline-section">
+        <div class="section-title">
+            <h2><i class="fa-solid fa-calendar-week" style="color: #a78bfa;"></i> Dyscyplina - Twój tydzień</h2>
+            <p>Ile zadań rozwiązałeś każdego dnia?</p>
+        </div>
+        
+        <div class="week-chart-container">
+            <div class="chart-bar">
+                <span class="day-label">Pon</span>
+                <div class="bar-wrapper">
+                    <div class="bar-fill" style="height: 30px; background: #6366f1;"></div>
+                </div>
+                <span class="bar-value">30</span>
+            </div>
+            
+            <div class="chart-bar">
+                <span class="day-label">Wt</span>
+                <div class="bar-wrapper">
+                    <div class="bar-fill" style="height: 50px; background: #6366f1;"></div>
+                </div>
+                <span class="bar-value">50</span>
+            </div>
+            
+            <div class="chart-bar">
+                <span class="day-label">Śr</span>
+                <div class="bar-wrapper">
+                    <div class="bar-fill" style="height: 40px; background: #6366f1;"></div>
+                </div>
+                <span class="bar-value">40</span>
+            </div>
+            
+            <div class="chart-bar">
+                <span class="day-label">Czw</span>
+                <div class="bar-wrapper">
+                    <div class="bar-fill" style="height: 70px; background: #6366f1;"></div>
+                </div>
+                <span class="bar-value">70</span>
+            </div>
+            
+            <div class="chart-bar">
+                <span class="day-label">Pt</span>
+                <div class="bar-wrapper">
+                    <div class="bar-fill" style="height: 60px; background: #6366f1;"></div>
+                </div>
+                <span class="bar-value">60</span>
+            </div>
+            
+            <div class="chart-bar">
+                <span class="day-label">Sob</span>
+                <div class="bar-wrapper">
+                    <div class="bar-fill" style="height: 25px; background: #6366f1;"></div>
+                </div>
+                <span class="bar-value">25</span>
+            </div>
+            
+            <div class="chart-bar">
+                <span class="day-label">Nd</span>
+                <div class="bar-wrapper">
+                    <div class="bar-fill" style="height: 20px; background: #6366f1;"></div>
+                </div>
+                <span class="bar-value">20</span>
+            </div>
+        </div>
+        
+        <div class="chart-insight">
+            <i class="fa-solid fa-circle-info"></i>
+            <p>W środę zrobiłeś mały przeskok! W sobotę i niedzielę odpoczywasz - tak trzymaj! 💪</p>
+        </div>
+    </div>
+
+    <!-- === SEKCJA 7: TRYB KOREPETYTORA (DLA NAUCZYCIELA) === -->
+    <div class="tutor-section">
+        <div class="section-title">
+            <h2><i class="fa-solid fa-chalkboard-user" style="color: #a78bfa;"></i> Tryb korepetytora</h2>
+            <p>Twoi uczniowie - gdzie mają braki?</p>
+        </div>
+        
+        <div class="students-grid">
+            <div class="student-card">
+                <div class="student-avatar" style="background: #6366f1;">H</div>
+                <div class="student-info">
+                    <h4>Hubert</h4>
+                    <div class="student-luki">
+                        <span class="luki-tag">logarytmy</span>
+                        <span class="luki-tag">ułamki</span>
+                    </div>
+                </div>
+                <div class="student-action">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+            </div>
+            
+            <div class="student-card">
+                <div class="student-avatar" style="background: #ec4899;">A</div>
+                <div class="student-info">
+                    <h4>Anna</h4>
+                    <div class="student-luki">
+                        <span class="luki-tag">procenty</span>
+                        <span class="luki-tag">równania</span>
+                    </div>
+                </div>
+                <div class="student-action">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+            </div>
+            
+            <div class="student-card">
+                <div class="student-avatar" style="background: #10b981;">M</div>
+                <div class="student-info">
+                    <h4>Mateusz</h4>
+                    <div class="student-luki">
+                        <span class="luki-tag">ułamki</span>
+                        <span class="luki-tag">geometria</span>
+                    </div>
+                </div>
+                <div class="student-action">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- === ORYGINALNY KALENDARZ (zachowany) === -->
+    <div class="calendar-section">
+        <div class="section-title">
+            <h2><i class="fa-solid fa-calendar-alt" style="color: #a78bfa;"></i> Harmonogram konsultacji</h2>
+            <p>Marzec 2026</p>
+        </div>
+        
+        <div class="calendar card">
+            <div class="calendar-grid">
+                <div class="day">Pon</div>
+                <div class="day">Wt</div>
+                <div class="day">Śr</div>
+                <div class="day">Czw</div>
+                <div class="day">Pt</div>
+                <div class="day">Sob</div>
+                <div class="day">Nd</div>
+
+                <div class="date empty"></div>
+                <div class="date empty"></div>
+                <div class="date"><span class="num">1</span></div>
+                <div class="date"><span class="num">2</span></div>
+                <div class="date"><span class="num">3</span><div class="event e1">Mnożenie</div></div>
+                <div class="date"><span class="num">4</span></div>
+                <div class="date"><span class="num">5</span><div class="event e2">Logarytmy</div></div>
+                <div class="date"><span class="num">6</span></div>
+                <div class="date"><span class="num">7</span></div>
+                <div class="date"><span class="num">8</span></div>
+                <div class="date"><span class="num">9</span></div>
+                <div class="date"><span class="num">10</span></div>
+                <div class="date"><span class="num">11</span></div>
+                <div class="date"><span class="num">12</span></div>
+                <div class="date"><span class="num">13</span><div class="event e3">Geometria</div></div>
+                <!-- ... reszta kalendarza ... -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Stopka -->
+    <div class="footer">
+        <p>© 2026 DonPedros - nauka przez zabawę 🌟</p>
+    </div>
+</div>
+
+<script>
+    const matura = new Date("Mar 9, 2026").getTime();
+
+    function update() {
+        const now = new Date().getTime();
+        const distance = matura - now;
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        document.getElementById("days").innerText = days;
+    }
+
+    update();
+    setInterval(update, 1000);
+</script>
+
+</body>
+</html>
