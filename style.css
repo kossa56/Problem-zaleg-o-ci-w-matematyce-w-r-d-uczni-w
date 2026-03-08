@@ -749,3 +749,20 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+.menu li a {
+    color: #cbd5f5;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.menu li a i {
+    width: 20px;
+}
+
+.menu li.active a {
+    color: #a78bfa;
+}
