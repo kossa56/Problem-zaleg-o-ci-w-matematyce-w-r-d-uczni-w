@@ -5,6 +5,7 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+  base: "/Problem-zaleg-o-ci-w-matematyce-w-r-d-uczni-w/",
   server: {
     host: "::",
     port: 8080,
